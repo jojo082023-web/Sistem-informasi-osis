@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - OSIS{% endblock %}
+{% block content %}
+<h2 class="page-title">Halo, {{ username }} 👋</h2>
+<div class="cards">
+  <div class="card">
+    <div class="card-title">Anggota</div>
+    <div class="card-value">{{ anggota_count }}</div>
+    <a class="card-link" href="{{ url_for('anggota') }}">Kelola →</a>
+  </div>
+  <div class="card">
+    <div class="card-title">Kegiatan</div>
+    <div class="card-value">{{ kegiatan_count }}</div>
+    <a class="card-link" href="{{ url_for('kegiatan') }}">Kelola →</a>
+  </div>
+  <div class="card">
+    <div class="card-title">Surat</div>
+    <div class="card-value">{{ surat_count }}</div>
+    <a class="card-link" href="{{ url_for('surat') }}">Kelola →</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Surat - OSIS{% endblock %}
+{% block content %}
+<h2 class="page-title">Surat OSIS</h2>
+
+<form class="form-inline" method="POST">
+  <input type="text" name="perihal" placeholder="Perihal" required>
+  <input type="date" name="tanggal" required>
+  <button class="btn" type="submit">Tambah</button>
+</form>
+
+<div class="table-wrap">
+  <table class="table">
+    <thead>
+      <tr><th>Perihal</th><th>Tanggal</th><th style="width:180px">Aksi</th></tr>
+    </thead>
+    <tbody>
+      {% for s in surat_list %}
+      <tr>
+        <td>{{ s.perihal }}</td>
+        <td>{{ s.tanggal }}</td>
+        <td class="actions">
+          <a class="btn-sm" href="{{ url_for('surat_edit', id=s.id) }}">Edit</a>
+          <form method="POST" action="{{ url_for('surat_hapus', id=s.id) }}" onsubmit="return confirm('Hapus surat ini?')" style="display:inline;">
+            <button class="btn-sm danger" type="submit">Hapus</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3" class="muted">Belum ada data.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

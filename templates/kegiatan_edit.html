@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>✏ Edit Kegiatan</h2>
+    <form method="POST">
+        <label for="nama_kegiatan">Nama Kegiatan</label>
+        <input type="text" id="nama_kegiatan" name="nama_kegiatan" value="{{ data['nama_kegiatan'] }}" required>
+
+        <label for="tanggal">Tanggal</label>
+        <input type="date" id="tanggal" name="tanggal" value="{{ data['tanggal'] }}" required>
+
+        <label for="deskripsi">Deskripsi</label>
+        <textarea id="deskripsi" name="deskripsi" rows="4" required>{{ data['deskripsi'] }}</textarea>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-primary">💾 Simpan Perubahan</button>
+            <a href="{{ url_for('kegiatan') }}" class="btn-secondary">↩ Kembali</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 25px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    label {
+        font-weight: bold;
+        margin-top: 12px;
+        display: block;
+        color: #555;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .btn-primary {
+        flex: 1;
+        padding: 10px;
+        margin-right: 5px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+    }
+    .btn-primary:hover {
+        background: #0056b3;
+    }
+    .btn-secondary {
+        flex: 1;
+        padding: 10px;
+        margin-left: 5px;
+        background: #6c757d;
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background 0.3s ease;
+    }
+    .btn-secondary:hover {
+        background: #5a6268;
+    }
+</style>
+{% endblock %}
+

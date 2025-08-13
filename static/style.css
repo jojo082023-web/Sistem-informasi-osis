@@ -1,0 +1,118 @@
+:root{
+  --primary:#0a62d0;
+  --primary-dark:#064aa1;
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#2b2b2b;
+  --muted:#6b7280;
+  --success:#d1fae5;
+  --danger:#fee2e2;
+  --warning:#fef3c7;
+  --radius:14px;
+  --shadow:0 10px 25px rgba(2, 41, 120, .12);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Navbar */
+.navbar{
+  background: linear-gradient(135deg, var(--primary), #3b82f6 60%);
+  position: sticky; top:0; z-index: 9;
+  box-shadow: var(--shadow);
+}
+.nav-inner{
+  max-width: 1100px; margin: 0 auto; padding: 14px 18px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{font-weight:800; color:#fff; letter-spacing:.3px; font-size:20px}
+.brand span{opacity:.85}
+.nav-inner nav a{
+  color:#fff; text-decoration:none; margin-left:18px; font-weight:600; opacity:.95
+}
+.nav-inner nav a:hover{opacity:1; text-decoration:underline}
+.btn{background:#fff;color:var(--primary);padding:8px 14px;border-radius:999px;display:inline-block}
+.btn-light{background:rgba(255,255,255,.2);color:#fff}
+
+/* Layout */
+.container{max-width: 1100px; margin: 28px auto; padding: 0 18px}
+.footer{padding:22px; text-align:center; color:var(--muted)}
+
+/* Flash */
+.flash-wrap{margin-bottom:16px}
+.flash{padding:12px 14px;border-radius:10px;margin:8px 0}
+.flash.success{background:var(--success)}
+.flash.danger{background:var(--danger)}
+.flash.warning{background:var(--warning)}
+
+/* Hero */
+.hero{
+  background: radial-gradient(1000px 400px at right top, #e0efff 0, transparent 60%),
+              radial-gradient(1000px 400px at left bottom, #e9f5ff 0, transparent 60%);
+  border-radius: var(--radius);
+  padding: 48px 28px; box-shadow: var(--shadow);
+}
+.hero-content{max-width: 720px}
+.hero h1{font-size:34px; margin:0 0 10px}
+.hero p{color:var(--muted); margin:0 0 16px}
+.hero-actions .btn{margin-right:10px}
+
+/* Auth card */
+.auth-card{
+  max-width:420px; margin: 24px auto; padding: 22px;
+  background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.auth-card h2{margin:6px 0 16px}
+.auth-card label{display:block; margin:10px 0 6px; color:#374151; font-weight:600}
+.auth-card input{
+  width:100%; padding:12px 12px;border:1px solid #d1d5db;border-radius:10px; outline:none
+}
+.auth-card input:focus{border-color: var(--primary)}
+.w-100{width:100%}
+
+/* Cards */
+.page-title{margin:8px 0 18px}
+.cards{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:16px}
+.card{
+  background:var(--card); border-radius:var(--radius); box-shadow: var(--shadow);
+  padding:18px
+}
+.card-title{color:var(--muted); font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:.6px}
+.card-value{font-size:32px; font-weight:800; margin:8px 0 6px}
+.card-link{color:var(--primary); text-decoration:none; font-weight:700}
+
+/* Forms inline */
+.form-inline{
+  background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:16px; margin-bottom:16px; display:grid; grid-template-columns: 1fr 1fr auto; gap:10px
+}
+.form-inline input{
+  width:100%; padding:10px;border:1px solid #d1d5db;border-radius:10px
+}
+.form-inline .btn{background:var(--primary); color:#fff; border:none}
+.form-inline .btn:hover{background:var(--primary-dark); color:#fff}
+
+/* Table */
+.table-wrap{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+.table{width:100%; border-collapse: collapse}
+.table thead th{
+  text-align:left; padding:12px; background:#0a62d0; color:#fff; font-weight:700
+}
+.table tbody td{padding:12px; border-top:1px solid #edf2f7}
+.actions{display:flex; gap:8px; align-items:center}
+.btn-sm{
+  padding:6px 10px; border-radius:8px; border:none; background:var(--primary); color:#fff; text-decoration:none
+}
+.btn-sm:hover{filter:brightness(.95)}
+.btn-sm.danger{background:#dc2626}
+
+/* Small screen */
+@media (max-width:700px){
+  .form-inline{grid-template-columns: 1fr; }
+  .nav-inner{flex-direction:column; gap:8px}
+}

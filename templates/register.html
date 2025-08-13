@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Register - OSIS{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h2>Buat Akun Baru</h2>
+  <form method="POST" action="{{ url_for('register') }}">
+    <label>Username</label>
+    <input type="text" name="username" required>
+    <label>Password</label>
+    <input type="password" name="password" required>
+    <button class="btn w-100" type="submit">Daftar</button>
+  </form>
+  <p class="muted">Sudah punya akun? <a href="{{ url_for('login') }}">Login</a></p>
+</div>
+{% endblock %}

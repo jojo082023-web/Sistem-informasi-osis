@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Daftar Anggota</h2>
+<a href="{{ url_for('anggota_tambah') }}" class="btn btn-primary">Tambah Anggota</a>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>Jabatan</th>
+        <th>Aksi</th>
+    </tr>
+    {% for a in anggota_list %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ a['nama'] }}</td>
+        <td>{{ a['kelas'] }}</td>
+        <td>{{ a['jabatan'] }}</td>
+        <td>
+            <a href="{{ url_for('anggota_edit', id=a['id']) }}">Edit</a> |
+            <a href="{{ url_for('anggota_hapus', id=a['id']) }}" onclick="return confirm('Hapus anggota ini?')">Hapus</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

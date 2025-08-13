@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Home - OSIS{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <h1>Sistem Informasi OSIS</h1>
+    <p>Kelola data anggota, kegiatan, dan surat OSIS lewat satu aplikasi sederhana namun bertenaga.</p>
+    {% if not session.get('user_id') %}
+    <div class="hero-actions">
+      <a href="{{ url_for('register') }}" class="btn">Mulai Daftar</a>
+      <a href="{{ url_for('login') }}" class="btn btn-light">Login</a>
+    </div>
+    {% else %}
+    <div class="hero-actions">
+      <a href="{{ url_for('dashboard') }}" class="btn">Buka Dashboard</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

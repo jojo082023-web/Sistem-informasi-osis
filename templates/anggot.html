@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Anggota</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; }
+        h1 { text-align: center; margin-top: 20px; }
+        table { width: 90%; margin: 20px auto; border-collapse: collapse; background: white; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .btn { padding: 6px 10px; border: none; cursor: pointer; border-radius: 4px; }
+        .btn-edit { background-color: #2196F3; color: white; }
+        .btn-delete { background-color: #f44336; color: white; }
+        .btn-add { background-color: #4CAF50; color: white; display: block; margin: 20px auto; padding: 10px 15px; text-decoration: none; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Daftar Anggota OSIS</h1>
+    <a href="{{ url_for('tambah_anggota') }}" class="btn-add">+ Tambah Anggota</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Jabatan</th>
+            <th>Aksi</th>
+        </tr>
+        {% for anggota in anggota_list %}
+        <tr>
+            <td>{{ anggota.id }}</td>
+            <td>{{ anggota.nama }}</td>
+            <td>{{ anggota.kelas }}</td>
+            <td>{{ anggota.jabatan }}</td>
+            <td>
+                <a href="{{ url_for('edit_anggota', id=anggota.id) }}" class="btn btn-edit">Edit</a>
+                <a href="{{ url_for('hapus_anggota', id=anggota.id) }}" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

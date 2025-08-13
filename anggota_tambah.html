@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>Tambah Anggota OSIS</h2>
+    <form method="POST">
+        <label>Nama</label>
+        <input type="text" name="nama" placeholder="Masukkan nama" required>
+        
+        <label>Jabatan</label>
+        <input type="text" name="jabatan" placeholder="Masukkan jabatan" required>
+        
+        <button type="submit">Simpan</button>
+    </form>
+</div>
+<style>
+    .form-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        margin-top: 15px;
+        padding: 10px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #0056b3;
+    }
+</style>
+{% endblock %}
+

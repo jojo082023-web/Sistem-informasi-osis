@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>👤 Edit Anggota</h2>
+    <form method="POST">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" name="nama" value="{{ data['nama'] }}" required>
+
+        <label for="kelas">Kelas</label>
+        <input type="text" id="kelas" name="kelas" value="{{ data['kelas'] }}" placeholder="Contoh: XI IPA 1" required>
+
+        <label for="jabatan">Jabatan</label>
+        <input type="text" id="jabatan" name="jabatan" value="{{ data['jabatan'] }}" required>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-primary">💾 Simpan Perubahan</button>
+            <a href="{{ url_for('anggota') }}" class="btn-secondary">↩ Kembali</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        max-width: 550px;
+        margin: 40px auto;
+        padding: 25px;
+        background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        animation: fadeIn 0.4s ease-in-out;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #007BFF;
+        font-weight: bold;
+    }
+    label {
+        font-weight: 600;
+        margin-top: 12px;
+        display: block;
+        color: #444;
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s ease;
+    }
+    input:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 8px rgba(0,123,255,0.2);
+        outline: none;
+    }
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .btn-primary {
+        flex: 1;
+        padding: 12px;
+        margin-right: 5px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+    .btn-primary:hover {
+        background: #0056b3;
+    }
+    .btn-secondary {
+        flex: 1;
+        padding: 12px;
+        margin-left: 5px;
+        background: #6c757d;
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s ease;
+    }
+    .btn-secondary:hover {
+        background: #5a6268;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(-10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Kegiatan - OSIS{% endblock %}
+{% block content %}
+<h2 class="page-title">Kegiatan OSIS</h2>
+
+<form class="form-inline" method="POST">
+  <input type="text" name="nama_kegiatan" placeholder="Nama Kegiatan" required>
+  <input type="date" name="tanggal" required>
+  <button class="btn" type="submit">Tambah</button>
+</form>
+
+<div class="table-wrap">
+  <table class="table">
+    <thead>
+      <tr><th>Nama Kegiatan</th><th>Tanggal</th><th style="width:180px">Aksi</th></tr>
+    </thead>
+    <tbody>
+      {% for k in kegiatan_list %}
+      <tr>
+        <td>{{ k.nama_kegiatan }}</td>
+        <td>{{ k.tanggal }}</td>
+        <td class="actions">
+          <a class="btn-sm" href="{{ url_for('kegiatan_edit', id=k.id) }}">Edit</a>
+          <form method="POST" action="{{ url_for('kegiatan_hapus', id=k.id) }}" onsubmit="return confirm('Hapus data ini?')" style="display:inline;">
+            <button class="btn-sm danger" type="submit">Hapus</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3" class="muted">Belum ada data.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
