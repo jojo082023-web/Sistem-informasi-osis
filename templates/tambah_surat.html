@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Tambah Surat</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label>Nomor Surat</label>
+            <input type="text" name="nomor_surat" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label>Perihal</label>
+            <input type="text" name="perihal" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Tanggal</label>
+            <input type="date" name="tanggal" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Keterangan</label>
+            <textarea name="keterangan" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+    </form>
+</div>
+{% endblock %}
+

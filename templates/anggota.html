@@ -1,26 +1,73 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Daftar Anggota</h2>
-<a href="{{ url_for('anggota_tambah') }}" class="btn btn-primary">Tambah Anggota</a>
-<table border="1" cellpadding="10">
-    <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Kelas</th>
-        <th>Jabatan</th>
-        <th>Aksi</th>
-    </tr>
-    {% for a in anggota_list %}
-    <tr>
-        <td>{{ loop.index }}</td>
-        <td>{{ a['nama'] }}</td>
-        <td>{{ a['kelas'] }}</td>
-        <td>{{ a['jabatan'] }}</td>
-        <td>
-            <a href="{{ url_for('anggota_edit', id=a['id']) }}">Edit</a> |
-            <a href="{{ url_for('anggota_hapus', id=a['id']) }}" onclick="return confirm('Hapus anggota ini?')">Hapus</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Daftar Anggota OSIS</h2>
+        <a href="{{ url_for('anggota_tambah') }}" class="btn btn-success">
+            <i class="bi bi-person-plus"></i> Tambah Anggota
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Kelas</th>
+                    <th>Jabatan</th>
+                    <th>Kehadiran</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in anggota_list %}
+                <tr class="text-center">
+                    <th scope="row">{{ loop.index }}</th>
+                    <td class="text-start">{{ a['nama'] }}</td>
+                    <td>{{ a['kelas'] }}</td>
+                    <td>{{ a['jabatan'] }}</td>
+                    <td>
+                        {% if a['kehadiran'] == 'Hadir' %}
+                            <span class="badge bg-success">Hadir</span>
+                        {% elif a['kehadiran'] == 'Tidak Hadir' %}
+                            <span class="badge bg-danger">Tidak Hadir</span>
+                        {% elif a['kehadiran'] == 'Sakit' %}
+                            <span class="badge bg-warning text-dark">Sakit</span>
+                        {% else %}
+                            <span class="badge bg-secondary">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-1 flex-wrap">
+                            <a href="{{ url_for('anggota_edit', id=a['id']) }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a href="{{ url_for('anggota_hapus', id=a['id']) }}" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Hapus anggota ini?')">
+                                <i class="bi bi-trash"></i> Hapus
+                            </a>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-bs-toggle="dropdown">
+                                    Kehadiran
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ url_for('set_kehadiran', id=a['id'], status='Hadir') }}">Hadir</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('set_kehadiran', id=a['id'], status='Tidak Hadir') }}">Tidak Hadir</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('set_kehadiran', id=a['id'], status='Sakit') }}">Sakit</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">Belum ada data anggota.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
+

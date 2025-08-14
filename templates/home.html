@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Home - Sistem Informasi OSIS{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero text-center py-5 bg-light">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Selamat Datang di Sistem Informasi OSIS</h1>
+        <p class="lead text-muted">Kelola data anggota, kegiatan, dan surat OSIS dengan lebih mudah & cepat</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg mt-3">
+            <i class="bi bi-speedometer2"></i> Masuk ke Dashboard
+        </a>
+    </div>
+</section>
+
+<!-- Quick Menu -->
+<section class="quick-menu py-5">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <i class="bi bi-people-fill text-primary display-5"></i>
+                    <h4 class="mt-3">Data Anggota</h4>
+                    <p class="text-muted">Lihat & kelola daftar anggota OSIS dengan mudah.</p>
+                    <a href="{{ url_for('anggota_list') }}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-arrow-right"></i> Lihat Anggota
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <i class="bi bi-calendar-event-fill text-success display-5"></i>
+                    <h4 class="mt-3">Data Kegiatan</h4>
+                    <p class="text-muted">Kelola semua kegiatan OSIS dengan rapi.</p>
+                    <a href="{{ url_for('kegiatan') }}" class="btn btn-outline-success btn-sm">
+                        <i class="bi bi-arrow-right"></i> Lihat Kegiatan
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <i class="bi bi-file-earmark-text-fill text-warning display-5"></i>
+                    <h4 class="mt-3">Data Surat</h4>
+                    <p class="text-muted">Simpan & kelola semua surat penting OSIS.</p>
+                    <a href="{{ url_for('surat') }}" class="btn btn-outline-warning btn-sm">
+                        <i class="bi bi-arrow-right"></i> Lihat Surat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="fw-bold">Tentang Aplikasi</h2>
+        <p class="text-muted mt-3">
+            Sistem Informasi OSIS ini dibuat untuk mempermudah pengelolaan data anggota, kegiatan, 
+            dan surat OSIS. Dengan tampilan yang sederhana namun modern, 
+            diharapkan semua proses administrasi dapat berjalan lebih efisien.
+        </p>
+    </div>
+</section>
+{% endblock %}

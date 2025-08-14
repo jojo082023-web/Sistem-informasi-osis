@@ -1,0 +1,57 @@
+.dashboard-cards {
+    display: flex;
+    justify-content: space-between; /* Sejajar dan merata */
+    gap: 20px;                     /* Jarak antar card */
+    flex-wrap: wrap;                /* Responsive: wrap ke bawah di layar kecil */
+    margin-bottom: 30px;
+}
+
+.card {
+    flex: 1 1 250px;               /* Minimal 250px, fleksibel */
+    background-color: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(2, 41, 120, 0.2);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.card-info h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.card-info p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.card-link {
+    margin-top: 15px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+/* Warna khusus per card */
+.card-blue { border-left: 6px solid #3b82f6; }
+.card-green { border-left: 6px solid #10b981; }
+.card-orange { border-left: 6px solid #f59e0b; }
+

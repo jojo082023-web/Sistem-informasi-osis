@@ -1,22 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Dashboard - OSIS{% endblock %}
+
 {% block content %}
-<h2 class="page-title">Halo, {{ username }} 👋</h2>
+<!-- Hero / Welcome Banner -->
+<div class="hero mb-4">
+  <div class="hero-content">
+    <h1>Selamat Datang, {{ username }} 👋</h1>
+    <p>Kelola Anggota, Kegiatan, dan Surat OSIS dengan mudah melalui dashboard ini.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('anggota') }}" class="btn btn-primary">Kelola Anggota</a>
+      <a href="{{ url_for('kegiatan') }}" class="btn btn-success">Kelola Kegiatan</a>
+      <a href="{{ url_for('surat') }}" class="btn btn-warning">Kelola Surat</a>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard cards sejajar -->
 <div class="cards">
   <div class="card">
     <div class="card-title">Anggota</div>
     <div class="card-value">{{ anggota_count }}</div>
-    <a class="card-link" href="{{ url_for('anggota') }}">Kelola →</a>
+    <a href="{{ url_for('anggota') }}" class="card-link">Kelola →</a>
   </div>
   <div class="card">
     <div class="card-title">Kegiatan</div>
     <div class="card-value">{{ kegiatan_count }}</div>
-    <a class="card-link" href="{{ url_for('kegiatan') }}">Kelola →</a>
+    <a href="{{ url_for('kegiatan') }}" class="card-link">Kelola →</a>
   </div>
   <div class="card">
     <div class="card-title">Surat</div>
     <div class="card-value">{{ surat_count }}</div>
-    <a class="card-link" href="{{ url_for('surat') }}">Kelola →</a>
+    <a href="{{ url_for('surat') }}" class="card-link">Kelola →</a>
   </div>
 </div>
+
+<!-- Tips atau info tambahan -->
+<div class="mt-4 p-3 bg-light rounded shadow-sm">
+  <h5>Tips:</h5>
+  <ul>
+    <li>Klik kartu untuk langsung masuk ke halaman pengelolaan.</li>
+    <li>Gunakan menu di navbar untuk navigasi cepat.</li>
+    <li>Pastikan data anggota dan kegiatan selalu diperbarui.</li>
+  </ul>
+</div>
 {% endblock %}
+

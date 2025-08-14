@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Kegiatan</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label>Nama Kegiatan</label>
+            <input type="text" name="nama" class="form-control" value="{{ kegiatan.nama }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Tanggal</label>
+            <input type="date" name="tanggal" class="form-control" value="{{ kegiatan.tanggal }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Keterangan</label>
+            <textarea name="keterangan" class="form-control" rows="3">{{ kegiatan.keterangan }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
+</div>
+{% endblock %}

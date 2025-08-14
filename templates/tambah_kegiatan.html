@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <h2 class="mb-4">Tambah Kegiatan</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Kegiatan</label>
+                <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama kegiatan" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="tanggal" class="form-label">Tanggal</label>
+                <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="keterangan" class="form-label">Keterangan</label>
+                <textarea id="keterangan" name="keterangan" class="form-control" rows="3" placeholder="Tambahkan keterangan kegiatan"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success px-4">Simpan</button>
+            <a href="{{ url_for('kegiatan') }}" class="btn btn-secondary px-4">Batal</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

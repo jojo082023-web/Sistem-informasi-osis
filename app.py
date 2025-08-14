@@ -48,6 +48,10 @@ def init_db():
     conn.commit()
     conn.close()
 
+@app.route("/")
+def home():
+    return render_template("home.html")
+
 # ---------- Helpers ----------
 def login_required(fn):
     from functools import wraps
@@ -103,6 +107,7 @@ def login():
     return render_template("login.html")
 
 @app.route("/logout")
+@login_required
 def logout():
     session.clear()
     flash("Anda telah logout.", "info")
@@ -200,6 +205,24 @@ def anggota_hapus(id):
     flash("Anggota dihapus.", "info")
     return redirect(url_for("anggota"))
 
+@app.route("/anggota")
+@login_required
+def anggota_list():
+    conn = get_db_connection()
+    anggota_list = conn.execute("SELECT * FROM anggota").fetchall()
+    conn.close()
+    return redirect(url_for("anggota_list"))
+
+@app.route("/anggota/<int:id>/kehadiran/<status>")
+@login_required
+def set_kehadiran(id, status):
+    conn = get_db_connection()
+    conn.execute("UPDATE anggota SET kehadiran = ? WHERE id = ?", (status, id))
+    conn.commit()
+    conn.close()
+    flash(f"Kehadiran anggota diubah menjadi {status}.", "success")
+    return redirect(url_for("anggota_list"))
+
 # ---------- Kegiatan (CRUD) ----------
 @app.route("/kegiatan", methods=["GET","POST"])
 @login_required
@@ -218,27 +241,42 @@ def kegiatan():
     conn.close()
     return render_template("kegiatan.html", kegiatan_list=kegiatan_list)
 
-@app.route("/kegiatan/<int:id>/edit", methods=["GET","POST"])
-@login_required
-def kegiatan_edit(id):
-    conn = get_db_connection()
-    data = conn.execute("SELECT * FROM kegiatan WHERE id=?", (id,)).fetchone()
-    if not data:
-        conn.close()
-        flash("Data kegiatan tidak ditemukan.", "danger")
-        return redirect(url_for("kegiatan"))
+@app.route("/tambah_kegiatan", methods=["GET", "POST"])
+def tambah_kegiatan():
     if request.method == "POST":
-        nama_kegiatan = request.form["nama_kegiatan"].strip()
-        tanggal = request.form["tanggal"].strip()
-        if nama_kegiatan and tanggal:
-            conn.execute("UPDATE kegiatan SET nama_kegiatan=?, tanggal=? WHERE id=?", (nama_kegiatan, tanggal, id))
-            conn.commit()
-            conn.close()
-            flash("Kegiatan diperbarui.", "success")
-            return redirect(url_for("kegiatan"))
-        flash("Nama kegiatan dan tanggal wajib diisi.", "danger")
+        nama = request.form["nama"]
+        tanggal = request.form["tanggal"]
+        keterangan = request.form["keterangan"]
+
+        conn = get_db_connection()
+        conn.execute(
+            "INSERT INTO kegiatan (nama, tanggal, keterangan) VALUES (?, ?, ?)",
+            (nama, tanggal, keterangan)
+        )
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for("kegiatan"))
+
+    return render_template("tambah_kegiatan.html")
+
+@app.route("/edit_kegiatan/<int:id>", methods=["GET", "POST"])
+def edit_kegiatan(id):
+    conn = get_db_connection()
+    k = conn.execute("SELECT * FROM kegiatan WHERE id = ?", (id,)).fetchone()
+    if request.method == "POST":
+        nama = request.form["nama"]
+        tanggal = request.form["tanggal"]
+        keterangan = request.form["keterangan"]
+        conn.execute(
+            "UPDATE kegiatan SET nama = ?, tanggal = ?, keterangan = ? WHERE id = ?",
+            (nama, tanggal, keterangan, id)
+        )
+        conn.commit()
+        conn.close()
+        return redirect(url_for("kegiatan"))
     conn.close()
-    return render_template("kegiatan_edit.html", data=data)
+    return render_template("edit_kegiatan.html", kegiatan=k)
 
 @app.route("/kegiatan/<int:id>/hapus", methods=["POST"])
 @login_required
@@ -267,6 +305,23 @@ def surat():
     surat_list = conn.execute("SELECT * FROM surat ORDER BY id DESC").fetchall()
     conn.close()
     return render_template("surat.html", surat_list=surat_list)
+
+@app.route("/tambah_surat", methods=["GET", "POST"])
+def tambah_surat():
+    if request.method == "POST":
+        nomor_surat = request.form["nomor_surat"]
+        tanggal = request.form["tanggal"]
+        perihal = request.form["perihal"]
+        keterangan = request.form["keterangan"]
+
+        conn = get_db_connection()
+        conn.execute(
+            "INSERT INTO surat (nomor_surat, tanggal, perihal, keterangan) VALUES (?, ?, ?, ?)",
+            (nomor_surat, tanggal, perihal, keterangan))
+        conn.commit()
+        conn.close()
+        return redirect(url_for("surat"))
+    return render_template("tambah_surat.html")
 
 @app.route("/surat/<int:id>/edit", methods=["GET","POST"])
 @login_required
@@ -303,4 +358,4 @@ def surat_hapus(id):
 # ---------- Run ----------
 if __name__ == "__main__":
     init_db()
-    app.run(host="0.0.0.0", port=5043, debug=True)
+    app.run(host="0.0.0.0", port=8035, debug=True)
